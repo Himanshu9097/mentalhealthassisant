@@ -16,3 +16,8 @@ document.querySelector(".login-btn").addEventListener("click", function () {
     console.log("Sign Up clicked");
     window.location.href = 'Login-Signup.html'; // You can change this to any other page
   });
+
+  document.querySelector(".login-btn").addEventListener("click", function () {
+    console.log("Login clicked");
+    window.open('login.html', '_blank');
+  });

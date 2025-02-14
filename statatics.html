@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mental Health Statistics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> </head>
+<body>
+    <h1>Mental Health Statistics - 2022</h1>
+    <canvas id="mentalHealthChart"></canvas>
+    <script>
+        const ctx = document.getElementById('mentalHealthChart');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Schizophrenia', 'Bipolar Disorder', 'Drug Use Disorders', 'Depression', 'Alcohol Use Disorders', 'Anxiety Disorders'],
+                datasets: [{
+                    label: 'Percentage',
+                    data: [0.7, 0.5, 0.4, 3.9, 0.2, 0.1], // Replace with your actual data
+                    backgroundColor: [ // Customize colors
+                        'rgba(255, 99, 132, 0.2)', // Example
+                        // ... more colors
+                    ],
+                    borderColor: [ // Customize border colors
+                        'rgba(255, 99, 132, 1)', // Example
+                        // ... more colors
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

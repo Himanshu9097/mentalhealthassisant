@@ -1,200 +1,525 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mind Mater</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
     <header class="header">
-        <nav>
-            <div class="left-section">
-                <a href="#" class="logo">Mind Mater</a>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="games.html">Games</a></li>
-                    <li><a href="#tools">Tools</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact Us</a></li>
-                    <li><a href="#docs">Documentation</a></li>
-                    <li><a href="#stats">Statistics</a></li>
-                </ul>
-            </div>
-            <button class="mobile-menu-btn">☰</button>
-            <div class="auth-buttons">
-                <button class="auth-btn login-btn">Book an Appointment</button>
-                <button class="auth-btn signup-btn">Sign Up/Login</button>
-            </div>
-        </nav>
-        
-        <div class="header-content">
-            <h1>
-                AI-Powered Mental Health
-                <span class="highlight">Support For Everyone</span>
-            </h1>
-            
-            <p class="subtitle">
-                Access personalized, private mental health guidance through our innovative AI consultant. Available 24/7, wherever you are.
-            </p>
-            
-            <div class="buttons">
-                <button class="btn btn-primary" id="getStartedBtn">Get Started</button>
-                <button class="btn btn-secondary" id="learnMoreBtn">Learn More</button>
-            </div>
+      <nav>
+        <div class="left-section">
+          <a href="#" class="logo">Mind Mater</a>
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="games.html">Games</a></li>
+            <li><a href="/journal-js-master/index.html">journal</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#docs">Documentation</a></li>
+            <li><a href="mental-health-dashboard.html">Statistics</a></li>
+          </ul>
         </div>
+        <button class="mobile-menu-btn">☰</button>
+        <div class="auth-buttons">
+          <button class="auth-btn login-btn">Book an Appointment</button>
+          <button class="auth-btn signup-btn">Sign Up/Login</button>
+        </div>
+      </nav>
+
+      <div class="header-content">
+        <h1>
+          AI-Powered Mental Health
+          <span class="highlight">Support For Everyone</span>
+        </h1>
+
+        <p class="subtitle">
+          Access personalized, private mental health guidance through our
+          innovative AI consultant. Available 24/7, wherever you are.
+        </p>
+
+        <div class="buttons">
+          <button class="btn btn-primary" id="getStartedBtn">
+            Chat With Bot
+          </button>
+          <button class="btn btn-secondary" id="learnMoreBtn">
+            Learn More
+          </button>
+        </div>
+      </div>
     </header>
 
     <section class="hero-section">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    AI-Powered
-                    <span class="hero-highlight">Mental Health Support</span>
-                </h1>
-                <p class="hero-description">
-                    Experience personalized, private mental health guidance through our innovative AI consultant. Available 24/7, breaking barriers of cost, stigma, and accessibility.
-                </p>
-                <div class="hero-buttons">
-                    <button class="hero-btn hero-btn-primary">Start Your Journey</button>
-                    <button class="hero-btn hero-btn-secondary">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <polygon points="10 8 16 12 10 16 10 8"/>
-                        </svg>
-                        Watch Demo
-                    </button>
-                </div>
-            </div>
-            <div class="hero-right">
-                <div class="hero-ai-logo">
-                    AI
-                </div>
-                <!-- <img src="images/herosection.jpeg" alt="AI Logo"> -->
-            </div>
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            AI-Powered
+            <span class="hero-highlight">Mental Health Support</span>
+          </h1>
+          <p class="hero-description">
+            Experience personalized, private mental health guidance through our
+            innovative AI consultant. Available 24/7, breaking barriers of cost,
+            stigma, and accessibility.
+          </p>
+          <div class="hero-buttons">
+            <button class="hero-btn hero-btn-primary">
+              Start Writing Your Journal
+            </button>
+            <button class="hero-btn hero-btn-secondary">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="10 8 16 12 10 16 10 8" />
+              </svg>
+              Watch Demo
+            </button>
+          </div>
         </div>
+        <div class="hero-right">
+          <div class="hero-ai-logo">AI</div>
+          <!-- <img src="images/herosection.jpeg" alt="AI Logo"> -->
+        </div>
+      </div>
     </section>
 
     <section class="innovative-features">
-        <div class="innovative-header">
-            <h1>Innovative Features</h1>
-            <p>Experience breakthrough mental health support powered by cutting-edge AI technology</p>
+      <div class="innovative-header">
+        <h1>Innovative Features</h1>
+        <p>
+          Experience breakthrough mental health support powered by cutting-edge
+          AI technology
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="icon-container bg-green">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+          </div>
+          <h3>Private & Secure</h3>
+          <p>
+            End-to-end encryption and anonymous sessions ensure your mental
+            health journey remains completely confidential.
+          </p>
         </div>
 
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="icon-container bg-green">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
-                </div>
-                <h3>Private & Secure</h3>
-                <p>End-to-end encryption and anonymous sessions ensure your mental health journey remains completely confidential.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-container bg-blue">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                    </svg>
-                </div>
-                <h3>24/7 Availability</h3>
-                <p>Access professional mental health support whenever you need it, day or night, without scheduling constraints.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-container bg-purple">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                        <line x1="8" y1="21" x2="16" y2="21"/>
-                        <line x1="12" y1="17" x2="12" y2="21"/>
-                    </svg>
-                </div>
-                <h3>AI-Powered Insights</h3>
-                <p>Advanced LLM technology provides personalized guidance and support based on your unique situation.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-container bg-red">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <line x1="12" y1="6" x2="12" y2="12"/>
-                        <line x1="12" y1="16" x2="12" y2="16"/>
-                    </svg>
-                </div>
-                <h3>Crisis Support</h3>
-                <p>Immediate assistance and resources during critical moments, with seamless escalation to human professionals when needed.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-container bg-yellow">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
-                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
-                    </svg>
-                </div>
-                <h3>Progress Tracking</h3>
-                <p>Monitor your mental health journey with detailed analytics and personalized progress reports.</p>
-            </div>
-
-            <div class="feature-card">
-                <div class="icon-container bg-teal">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                        <circle cx="9" cy="7" r="4"/>
-                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                </div>
-                <h3>Community Support</h3>
-                <p>Optional access to moderated peer support groups and community resources for shared experiences.</p>
-            </div>
+        <div class="feature-card">
+          <div class="icon-container bg-blue">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+            </svg>
+          </div>
+          <h3>24/7 Availability</h3>
+          <p>
+            Access professional mental health support whenever you need it, day
+            or night, without scheduling constraints.
+          </p>
         </div>
+
+        <div class="feature-card">
+          <div class="icon-container bg-purple">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+          </div>
+          <h3>AI-Powered Insights</h3>
+          <p>
+            Advanced LLM technology provides personalized guidance and support
+            based on your unique situation.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon-container bg-red">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="6" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12" y2="16" />
+            </svg>
+          </div>
+          <h3>Crisis Support</h3>
+          <p>
+            Immediate assistance and resources during critical moments, with
+            seamless escalation to human professionals when needed.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon-container bg-yellow">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+              />
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
+            </svg>
+          </div>
+          <h3>Progress Tracking</h3>
+          <p>
+            Monitor your mental health journey with detailed analytics and
+            personalized progress reports.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="icon-container bg-teal">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <h3>Community Support</h3>
+          <p>
+            Optional access to moderated peer support groups and community
+            resources for shared experiences.
+          </p>
+        </div>
+      </div>
     </section>
-
 
     <section class="chain-container">
-        <div class="chain-header">
-            <h1>How It Works</h1>
-            <p>Experience seamless mental health support in four simple steps</p>
+      <div class="chain-header">
+        <h1>How It Works</h1>
+        <p>Experience seamless mental health support in four simple steps</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item" data-step="1">
+          <div class="timeline-content">
+            <h3 class="timeline-title">Sign Up & Profile Creation</h3>
+            <p class="timeline-text">
+              Create your secure account and complete a comprehensive assessment
+              to personalize your experience
+            </p>
+          </div>
         </div>
 
-        <div class="timeline">
-            <div class="timeline-item" data-step="1">
-                <div class="timeline-content">
-                    <h3 class="timeline-title">Sign Up & Profile Creation</h3>
-                    <p class="timeline-text">Create your secure account and complete a comprehensive assessment to personalize your experience</p>
-                </div>
-            </div>
-
-            <div class="timeline-item" data-step="2">
-                <div class="timeline-content">
-                    <h3 class="timeline-title">AI Chat Bot Assistant</h3>
-                    <p class="timeline-text">Connect with your AI Chat Bot Assistant</p>
-                </div>
-            </div>
-
-            <div class="timeline-item" data-step="3">
-                <div class="timeline-content">
-                    <h3 class="timeline-title">Personalized Support</h3>
-                    <p class="timeline-text">Receive tailored guidance, coping strategies, and real-time emotional support</p>
-                </div>
-            </div>
-
-            <div class="timeline-item" data-step="4">
-                <div class="timeline-content">
-                    <h3 class="timeline-title">Track Progress</h3>
-                    <p class="timeline-text">Monitor your journey with detailed insights and milestone achievements</p>
-                </div>
-            </div>
+        <div class="timeline-item" data-step="2">
+          <div class="timeline-content">
+            <h3 class="timeline-title">AI Chat Bot Assistant</h3>
+            <p class="timeline-text">Connect with your AI Chat Bot Assistant</p>
+          </div>
         </div>
 
-        <a href="#" class="cta-button">Start Your Journey Now</a>
-        <p class="trial-text">No credit card required • Free 7-day trial</p>
+        <div class="timeline-item" data-step="3">
+          <div class="timeline-content">
+            <h3 class="timeline-title">Personalized Support</h3>
+            <p class="timeline-text">
+              Receive tailored guidance, coping strategies, and real-time
+              emotional support
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-step="4">
+          <div class="timeline-content">
+            <h3 class="timeline-title">Track Progress</h3>
+            <p class="timeline-text">
+              Monitor your journey with detailed insights and milestone
+              achievements
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <a href="#" class="cta-button">Start Your Journey Now</a>
+      <p class="trial-text">No credit card required • Free 7-day trial</p>
     </section>
 
-    <script src="script.js">
+    <!-- contact section  -->
 
-    </script>
-</body>
+    <div class="contact-container">
+      <!-- Contact Information -->
+      <div class="contact-info" id="contact">
+        <h1>Get in Touch</h1>
+        <p>
+          Have questions about our AI-powered mental health support? We're here
+          to help you get started on your journey to better mental well-being.
+        </p>
+
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="icon-box">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+              </svg>
+            </div>
+            <div class="contact-item-content">
+              <h3>Email</h3>
+              <p>mindmaster@aimentalhealth.com</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="icon-box">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"
+                />
+              </svg>
+            </div>
+            <div class="contact-item-content">
+              <h3>Phone</h3>
+              <p>+91 9102309204</p>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="icon-box">
+              <svg
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
+            <div class="contact-item-content">
+              <h3>Location</h3>
+              <p>India Support - Available India</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <form action="https://formspree.io/f/xldgpgnk" method="post">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Your name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="himanshu748808@email.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <select id="subject" required>
+              <option value="">Select a subject</option>
+              <option value="support">depression</option>
+              <option value="billing">anxiety</option>
+              <option value="partnership">Relationship</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              placeholder="Your message"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <!-- Company Info -->
+        <div class="footer-section">
+          <h3>AI Mental Health</h3>
+          <p>
+            Revolutionizing mental health support through AI and 3D technology.
+          </p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/enhimanshu13/" aria-label="Facebook">
+              <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                />
+              </svg>
+            </a>
+            <a href="https://api.whatsapp.com/send/?phone=%2B919102309204&text&type=phone_number&app_absent=0" aria-label="WhatsApp">
+              <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+                />
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/enhimanshukumar/" aria-label="Instagram">
+              <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                />
+              </svg>
+            </a>
+            <a href="https://x.com/enhimanshu13" aria-label="Twitter">
+              <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"
+                />
+              </svg>
+            </a>
+            <a href="https://www.linkedin.com/in/himanshu-kumar-43a8b130b/" aria-label="LinkedIn">
+              <svg
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul class="footer-links">
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">API Reference</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Support Center</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <p>Stay updated with our latest features and releases.</p>
+          <div class="newsletter">
+            <input type="email" placeholder="Enter your email" />
+            <button>Subscribe</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div>© 2024 AI Mental Health. All rights reserved.</div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
 </html>

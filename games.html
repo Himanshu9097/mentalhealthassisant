@@ -14,6 +14,136 @@
         color: #ffffff;
       }
 
+      /* nav css */
+
+      nav {
+        background-color: #1e1e1e; 
+        border-radius: 50px; 
+        padding: 10px 20px; 
+        max-width: 90%; 
+        margin: 0 auto; 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+        transition: box-shadow 0.3s ease; 
+      }
+
+      nav:hover {
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); 
+      }
+
+      .left-section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; 
+        gap: 50px;
+        margin-top: 20px;
+        padding: 10px;
+      }
+
+      .logo {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #10b981;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 15px;
+      }
+
+      .auth-btn {
+        padding: 8px 20px;
+        border-radius: 6px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .login-btn {
+        background: transparent;
+        color: white;
+        border: 1px solid white;
+      }
+
+      .login-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .signup-btn {
+        background: #10b981;
+        color: white;
+        border: none;
+      }
+
+      .signup-btn:hover {
+        background: #059669;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      @media (max-width: 1024px) {
+        .left-section {
+          gap: 30px;
+        }
+
+        .nav-links {
+          gap: 20px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .nav-links,
+        .auth-buttons {
+          display: none;
+        }
+
+        .nav-links.active,
+        .auth-buttons.active {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 80px;
+          left: 0;
+          right: 0;
+          background: black;
+          padding: 20px;
+          align-items: center;
+        }
+
+        .left-section {
+          flex-grow: 1;
+          justify-content: space-between;
+        }
+      }
+
       .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -47,6 +177,11 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 24px;
+      }
+
+      .features-grid a{
+        text-decoration: none;
+        color: #ffffff;
       }
 
       .feature-card {
@@ -118,6 +253,22 @@
     </style>
   </head>
   <body>
+    <header>
+      <nav>
+        <div class="left-section">
+          <a href="#" class="logo">Mind Mater</a>
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="games.html">Games</a></li>
+            <li><a href="/journal-js-master/index.html">journal</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#docs">Documentation</a></li>
+            <li><a href="#stats">Statistics</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
     <div class="container">
       <div class="header">
         <h1>Games For Stress Relief</h1>
@@ -129,28 +280,30 @@
       </div>
 
       <div class="features-grid">
-        <div class="feature-card">
-          <div class="icon-container bg-green">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-            </svg>
+        <a href="zenzone.html">
+          <div class="feature-card">
+            <div class="icon-container bg-green">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
+            <h3>Stress-Busting Match</h3>
+            <p>
+              Create a set of cards with different stress-relieving activities
+              (e.g. "Take a deep breath", "Go for a walk", "Do a quick workout",
+              etc.) Shuffle the cards and deal them out to the player The player
+              must match the cards in pairs to "clear" the stress Each match
+              removes a certain amount of stress from the player's "stress meter"
+            </p>
           </div>
-          <h3>Stress-Busting Match</h3>
-          <p>
-            Create a set of cards with different stress-relieving activities
-            (e.g. "Take a deep breath", "Go for a walk", "Do a quick workout",
-            etc.) Shuffle the cards and deal them out to the player The player
-            must match the cards in pairs to "clear" the stress Each match
-            removes a certain amount of stress from the player's "stress meter"
-          </p>
-        </div>
+        </a>
 
         <div class="feature-card">
           <div class="icon-container bg-blue">
