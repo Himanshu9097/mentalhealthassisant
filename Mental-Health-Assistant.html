@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Assessment Chatbot</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/responsivevoice/1.5.0/responsivevoice.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --background: #ffffff;
+            --text: #333333;
+            --card-bg: #f5f5f5;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #64b5f6;
+            --background: #1a1a1a;
+            --text: #ffffff;
+            --card-bg: #2d2d2d;
+            --shadow: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .theme-toggle {
+            background: var(--primary-color);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .chat-container {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1rem;
+            height: 60vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+        .message {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .bot-message {
+            background: var(--primary-color);
+            color: white;
+            margin-right: auto;
+        }
+
+        .user-message {
+            background: var(--card-bg);
+            border: 1px solid var(--primary-color);
+            margin-left: auto;
+        }
+
+        .input-container {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .user-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .send-button {
+            padding: 0 2rem;
+            background: var(--primary-color);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .options-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .option-button {
+            background: var(--card-bg);
+            border: 1px solid var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            color: var(--text);
+        }
+
+        .disclaimer {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: var(--text);
+            opacity: 0.8;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 1rem; }
+            .message { max-width: 90%; }
+        }
+        .header-banner {
+    background: var(--primary-color);
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px var(--shadow);
+}
+
+/* Feature Controls */
+.feature-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.control-button {
+    background: var(--primary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.2s;
+}
+
+/* Message Enhancements */
+.message-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    border: 2px solid var(--primary-color);
+}
+
+/* Language Selector */
+.language-selector {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 2px solid var(--primary-color);
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.file-upload {
+    display: none;
+}
+
+.emotion-indicator {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+}
+
+/* Typography Enhancements */
+.typography-enhanced {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.8;
+}
+
+/* Responsive Typography */
+@media (min-width: 320px) {
+    body { font-size: 14px; }
+    h1 { font-size: 1.5rem; }
+}
+
+@media (min-width: 768px) {
+    body { font-size: 16px; }
+    h1 { font-size: 2rem; }
+}
+
+@media (min-width: 1024px) {
+    body { font-size: 18px; }
+    h1 { font-size: 2.5rem; }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Mental Health Assistant</h1>
+            <button class="theme-toggle" onclick="toggleTheme()">🔆🌙</button>
+        </div>
+        
+        <div class="chat-container" id="chatContainer"></div>
+        
+        <div class="input-container">
+            <input type="text" class="user-input" id="userInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+            <button class="send-button" onclick="sendMessage()">Send</button>
+        </div>
+        
+        <p class="disclaimer">
+            Disclaimer: This chatbot is not a substitute for professional medical advice, diagnosis, or treatment. 
+            If you're experiencing a mental health emergency, please contact emergency services or call the National Crisis Hotline at 988.
+        </p>
+    </div>
+
+    <!-- Add feature controls below header -->
+<div class="feature-controls">
+    <button class="control-button" onclick="toggleSpeech()">
+        <i class="fas fa-volume-up"></i> Toggle Speech
+    </button>
+    <button class="control-button" onclick="document.getElementById('fileInput').click()">
+        <i class="fas fa-file-upload"></i> Upload File
+    </button>
+    <input type="file" id="fileInput" class="file-upload" onchange="handleFileUpload(event)">
+    <select class="language-selector" onchange="changeLanguage(this.value)">
+        <option value="en">English</option>
+        <option value="hi">हिंदी (Hindi)</option>
+        <option value="bn">বাংলা (Bengali)</option>
+        <option value="te">తెలుగు (Telugu)</option>
+        <option value="ta">தமிழ் (Tamil)</option>
+        <option value="mr">मराठी (Marathi)</option>
+        <option value="gu">ગુજરાતી (Gujarati)</option>
+        <option value="kn">ಕನ್ನಡ (Kannada)</option>
+        <option value="ml">മലയാളം (Malayalam)</option>
+        <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+    </select>
+</div>
+
+    <script>
+        const OPENROUTER_API_KEY = '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';
+        
+        let currentAssessment = {
+            mood: null,
+            sleep: null,
+            stress: null,
+            activities: null
+        };
+
+        const questions = [
+            {
+                text: "How would you describe your mood today?",
+                options: ["Very Good", "Good", "Neutral", "Low", "Very Low"]
+            },
+            {
+                text: "How has your sleep been lately?",
+                options: ["Excellent", "Good", "Fair", "Poor", "Very Poor"]
+            },
+            {
+                text: "What's your current stress level?",
+                options: ["Very Low", "Low", "Moderate", "High", "Very High"]
+            },
+            {
+                text: "How engaged are you in daily activities?",
+                options: ["Very Engaged", "Somewhat Engaged", "Neutral", "Somewhat Disengaged", "Very Disengaged"]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        async function sendToAI(message) {
+            try {
+                const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
+                    model: "google/gemini-2.0-pro-exp-02-05:free",
+                    messages: [
+                        {
+                            role: "system",
+                            content: "You are a supportive mental health assistant. Provide encouraging, non-judgmental responses. Remember to always suggest professional help when appropriate."
+                        },
+                        {
+                            role: "user",
+                            content: message
+                        }
+                    ]
+                }, {
+                    headers: {
+                        'Authorization': `Bearer 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`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                return response.data.choices[0].message.content;
+            } catch (error) {
+                console.error('Error:', error);
+                return "I apologize, but I'm having trouble processing your response. Please try again.";
+            }
+        }
+
+        function addMessage(message, isUser = false) {
+            const chatContainer = document.getElementById('chatContainer');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'}`;
+            messageDiv.textContent = message;
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        function addOptions(options) {
+            const chatContainer = document.getElementById('chatContainer');
+            const optionsDiv = document.createElement('div');
+            optionsDiv.className = 'options-container';
+            
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'option-button';
+                button.textContent = option;
+                button.onclick = () => handleOption(option);
+                optionsDiv.appendChild(button);
+            });
+            
+            chatContainer.appendChild(optionsDiv);
+        }
+
+        async function handleOption(option) {
+            addMessage(option, true);
+            
+            switch(currentQuestionIndex) {
+                case 0: currentAssessment.mood = option; break;
+                case 1: currentAssessment.sleep = option; break;
+                case 2: currentAssessment.stress = option; break;
+                case 3: currentAssessment.activities = option; break;
+            }
+            
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(() => {
+                    addMessage(questions[currentQuestionIndex].text);
+                    addOptions(questions[currentQuestionIndex].options);
+                }, 500);
+            } else {
+                // Generate final assessment
+                const assessment = `Based on your responses:
+                Mood: ${currentAssessment.mood}
+                Sleep: ${currentAssessment.sleep}
+                Stress: ${currentAssessment.stress}
+                Activity Level: ${currentAssessment.activities}
+                
+                Please provide an assessment and recommendations.`;
+                
+                addMessage("Thank you for sharing. I'm analyzing your responses...");
+                const aiResponse = await sendToAI(assessment);
+                addMessage(aiResponse);
+                
+                // Reset for new assessment
+                currentQuestionIndex = 0;
+                currentAssessment = {
+                    mood: null,
+                    sleep: null,
+                    stress: null,
+                    activities: null
+                };
+                
+                setTimeout(() => {
+                    addMessage("Would you like to start another assessment?");
+                    addOptions(["Yes", "No"]);
+                }, 2000);
+            }
+        }
+
+        async function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            
+            if (message) {
+                addMessage(message, true);
+                userInput.value = '';
+                
+                const response = await sendToAI(message);
+                addMessage(response);
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function toggleTheme() {
+            document.body.setAttribute('data-theme', 
+                document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+        }
+
+        // Start the conversation
+        window.onload = () => {
+            addMessage("Hello! I'm here to help you assess your mental well-being. Please note that I'm not a substitute for professional help. Let's begin with the first question:");
+            addMessage(questions[0].text);
+            addOptions(questions[0].options);
+        };
+        // Add these new variables to the existing ones
+let isSpeechEnabled = false;
+let currentLanguage = 'en';
+
+// Add new questions to the existing questions array
+questions.push({
+    text: "Could you describe any specific issues or challenges you're facing?",
+    options: ["Work Stress", "Relationship Issues", "Anxiety", "Depression", "Other"]
+});
+
+questions.push({
+    text: "How long have you been experiencing these feelings?",
+    options: ["Less than a week", "Few weeks", "1-3 months", "3-6 months", "Over 6 months"]
+});
+
+// Add new functions for speech features
+function toggleSpeech() {
+    isSpeechEnabled = !isSpeechEnabled;
+    const message = isSpeechEnabled ? "Speech output enabled" : "Speech output disabled";
+    addMessage(message);
+}
+
+function speak(text) {
+    if (isSpeechEnabled) {
+        responsiveVoice.speak(text, "UK English Female");
+    }
+}
+
+// Add file upload handling
+async function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = async (e) => {
+            const text = e.target.result;
+            addMessage(`Uploaded file content: ${file.name}`, true);
+            const response = await sendToAI(`Please analyze this text regarding mental health: ${text}`);
+            addMessage(response);
+        };
+        reader.readAsText(file);
+    }
+}
+
+// Add language support
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    const message = "Language changed to: " + document.querySelector(`option[value="${lang}"]`).text;
+    addMessage(message);
+}
+
+// Add emotion detection
+function getEmotionEmoji(message) {
+    const lowerMessage = message.toLowerCase();
+    if (lowerMessage.includes('happy') || lowerMessage.includes('good')) return '😊';
+    if (lowerMessage.includes('sad') || lowerMessage.includes('low')) return '😢';
+    if (lowerMessage.includes('angry') || lowerMessage.includes('frustrated')) return '😠';
+    if (lowerMessage.includes('anxious') || lowerMessage.includes('worried')) return '😰';
+    if (lowerMessage.includes('thank')) return '🙏';
+    return null;
+}
+
+// Modify the existing addMessage function
+function addMessage(message, isUser = false) {
+    const chatContainer = document.getElementById('chatContainer');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'} typography-enhanced`;
+
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'message-header';
+
+    const avatar = document.createElement('img');
+    avatar.className = 'avatar';
+    avatar.src = isUser ? 'https://cdn-icons-png.flaticon.com/512/6596/6596121.png' : 'https://thumbs.dreamstime.com/b/generative-ai-young-smiling-man-avatar-man-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-d-vector-people-279560903.jpg';
+    avatar.alt = isUser ? 'User Avatar' : 'AI Assistant';
+
+    const name = document.createElement('span');
+    name.textContent = isUser ? 'You' : 'AI Assistant';
+
+    headerDiv.appendChild(avatar);
+    headerDiv.appendChild(name);
+
+    const emotion = getEmotionEmoji(message);
+    if (emotion) {
+        const emotionSpan = document.createElement('span');
+        emotionSpan.className = 'emotion-indicator';
+        emotionSpan.textContent = emotion;
+        headerDiv.appendChild(emotionSpan);
+    }
+
+    messageDiv.appendChild(headerDiv);
+    messageDiv.appendChild(document.createTextNode(message));
+    chatContainer.appendChild(messageDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    if (!isUser) {
+        speak(message);
+    }
+}
+    </script>
+</body>
+</html>

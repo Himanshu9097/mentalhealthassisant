@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 48px 24px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 16px;
+            color: #333;
+        }
+
+        .header p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-container {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* Icon background colors */
+        .bg-green { background-color: #e6f7e6; }
+        .bg-blue { background-color: #e6f0ff; }
+        .bg-purple { background-color: #f3e6ff; }
+        .bg-red { background-color: #ffe6e6; }
+        .bg-yellow { background-color: #fff7e6; }
+        .bg-teal { background-color: #e6fff7; }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Innovative Features</h1>
+            <p>Experience breakthrough mental health support powered by cutting-edge AI technology</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon-container bg-green">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <h3>Private & Secure</h3>
+                <p>End-to-end encryption and anonymous sessions ensure your mental health journey remains completely confidential.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container bg-blue">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
+                <h3>24/7 Availability</h3>
+                <p>Access professional mental health support whenever you need it, day or night, without scheduling constraints.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container bg-purple">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <line x1="8" y1="21" x2="16" y2="21"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                </div>
+                <h3>AI-Powered Insights</h3>
+                <p>Advanced LLM technology provides personalized guidance and support based on your unique situation.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container bg-red">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="6" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12" y2="16"/>
+                    </svg>
+                </div>
+                <h3>Crisis Support</h3>
+                <p>Immediate assistance and resources during critical moments, with seamless escalation to human professionals when needed.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container bg-yellow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                    </svg>
+                </div>
+                <h3>Progress Tracking</h3>
+                <p>Monitor your mental health journey with detailed analytics and personalized progress reports.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-container bg-teal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3>Community Support</h3>
+                <p>Optional access to moderated peer support groups and community resources for shared experiences.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
