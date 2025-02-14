@@ -463,12 +463,16 @@ h1 {
         justify-content: center;
     }
 
-    .hero-ai-logo {
+    .hero-ai-logo  {
         font-size: 8rem;
         position: static;
         transform: none;
         margin-top: 2rem;
+        height: 200px;
+        width: 200px;
     }
+
+   
 }
 
 @media (max-width: 768px) {
@@ -566,5 +570,164 @@ h1 {
 @media (max-width: 768px) {
     .features-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+/* chain css below innovation */
+
+
+.chain-container {
+    background-color: #1a1a1a;
+    max-width:100%;
+    color: white;
+    margin: 0 auto;
+}
+
+.chain-header {
+    text-align: center;
+    margin-bottom: 64px;
+}
+
+.chain-header h1 {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.chain-header p {
+    color: #999;
+}
+
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+/* Timeline vertical line */
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: #00bf8f;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    margin-bottom: 60px;
+}
+
+/* Timeline circles */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    right: -16px;
+    background-color: #00bf8f;
+    border-radius: 50%;
+    top: 15px;
+    z-index: 1;
+}
+
+/* Numbers in circles */
+.timeline-item::before {
+    content: attr(data-step);
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    right: -16px;
+    top: 15px;
+    z-index: 2;
+    text-align: center;
+    line-height: 32px;
+    color: white;
+    font-weight: bold;
+}
+
+/* Left items */
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+/* Right items */
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+
+.timeline-item:nth-child(even)::after,
+.timeline-item:nth-child(even)::before {
+    left: -16px;
+}
+
+.timeline-content {
+    padding: 20px;
+    background: #2a2a2a;
+    border-radius: 8px;
+}
+
+.timeline-title {
+    color: #00bf8f;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.timeline-text {
+    color: #999;
+    line-height: 1.5;
+    font-size: 14px;
+}
+
+.cta-button {
+    display: block;
+    width: fit-content;
+    margin: 60px auto 0;
+    padding: 12px 24px;
+    background-color: #00bf8f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.trial-text {
+    text-align: center;
+    color: #999;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item::before,
+    .timeline-item::after {
+        left: 15px;
+        right: auto;
+    }
+
+    .timeline-item:nth-child(even) {
+        left: 0;
     }
 }

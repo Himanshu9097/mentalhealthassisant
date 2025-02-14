@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultant Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+        text-align: center;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+      .card {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease-in-out;
+      }
+      .card:hover {
+        transform: scale(1.05);
+      }
+      .card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .card h3 {
+        margin: 10px 0;
+      }
+      .card p {
+        color: #555;
+      }
+      .search-container {
+        margin-bottom: 20px;
+      }
+      .search-container input {
+        padding: 10px;
+        width: 250px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      .search-container button {
+        padding: 10px 15px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Find a Consultant Near You</h1>
+      <div class="search-container">
+        <input
+          type="text"
+          id="locationInput"
+          placeholder="Enter your location"
+        />
+        <button onclick="searchConsultants()">Search</button>
+      </div>
+      <div class="grid" id="consultantGrid">
+        <!-- Consultant cards will be dynamically added here -->
+      </div>
+    </div>
+
+    <script>
+      const consultants = [
+        {
+          name: "John Doe",
+          expertise: "Business Strategy",
+          location: "punjab",
+          image: "/images/c3.jpg",
+        },
+        {
+          name: "Jane Smith",
+          expertise: "Marketing & Branding",
+          location: "mumbai",
+          image: "/images/c4.jpg",
+        },
+        {
+          name: "Robert Brown",
+          expertise: "Financial Planning",
+          location: "delhi",
+          image: "/images/c4.jpg",
+        },
+        {
+          name: "Emily Johnson",
+          expertise: "Tech Consulting",
+          location: "bangalore",
+          image: "/images/c5.jpg",
+        },
+        {
+          name: "Division of Student Relationship, LPU",
+          expertise: "Mental Health Consultant",
+          location: "lpu",
+          image: "/images/c2.jpg",
+        },
+        {
+          name: "Emily Johnson",
+          expertise: "Tech Consulting",
+          location: "phagwara",
+          image: "/images/c6.jpg",
+        },
+        {
+          name: "Emily Johnson",
+          expertise: "Tech Consulting",
+          location: "patna",
+          image: "https://via.placeholder.com/250",
+        },
+      ];
+
+      function searchConsultants() {
+        const locationInput = document
+          .getElementById("locationInput")
+          .value.trim()
+          .toLowerCase();
+        const gridContainer = document.getElementById("consultantGrid");
+        gridContainer.innerHTML = "";
+
+        const filteredConsultants = consultants.filter((consultant) =>
+          consultant.location.toLowerCase().includes(locationInput)
+        );
+
+        if (filteredConsultants.length === 0) {
+          gridContainer.innerHTML =
+            "<p>No consultants found in this location.</p>";
+        } else {
+          filteredConsultants.forEach((consultant) => {
+            gridContainer.innerHTML += `
+                        <div class="card">
+                            <img src="${consultant.image}" alt="${consultant.name}">
+                            <h3>${consultant.name}</h3>
+                            <p>Expertise: ${consultant.expertise}</p>
+                            <p>Location: ${consultant.location}</p>
+                        </div>
+                    `;
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

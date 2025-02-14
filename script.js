@@ -8,7 +8,7 @@ document.getElementById("getStartedBtn").addEventListener("click", function () {
   // Redirect for the "Login" button
 document.querySelector(".login-btn").addEventListener("click", function () {
     console.log("Login clicked");
-    window.location.href = 'Login-Signup.html';
+    window.location.href = 'consultant.html';
   });
   
   // Redirect for the "Sign Up" button
