@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress-Solve</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(120deg, #a18cd1, #fbc2eb);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-size: 28px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        #stress-meter {
+            width: 350px;
+            height: 30px;
+            background: #ff4d4d;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px auto;
+            border: 2px solid #333;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        #meter-bar {
+            height: 100%;
+            width: 100%;
+            background: #33cc33;
+            transition: width 0.5s ease-in-out;
+        }
+        #question {
+            font-size: 26px;
+            margin: 20px;
+            background: #ffeb3b;
+            padding: 15px;
+            display: inline-block;
+            border-radius: 15px;
+            color: #333;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        input {
+            font-size: 24px;
+            padding: 12px;
+            width: 150px;
+            text-align: center;
+            border-radius: 8px;
+            border: 2px solid #555;
+            outline: none;
+        }
+        button {
+            font-size: 18px;
+            padding: 12px 25px;
+            margin-top: 15px;
+            cursor: pointer;
+            border: none;
+            background: #ff5722;
+            color: white;
+            border-radius: 8px;
+            transition: 0.3s;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        button:hover {
+            background: #e64a19;
+            transform: scale(1.05);
+        }
+        #message {
+            display: none;
+            font-size: 26px;
+            background: #00e676;
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 20px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            animation: popIn 1s ease-in-out;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>🎉 Stress-Solve - Relax Your Mind 🧘</h1>
+    <p style="color:white; font-size: 20px;">Solve math problems to reduce stress and feel calm!</p>
+
+    <div id="stress-meter">
+        <div id="meter-bar"></div>
+    </div>
+
+    <div id="question">Loading...</div>
+    <input type="number" id="answer" placeholder="Your Answer">
+    <button onclick="checkAnswer()">Submit</button>
+
+    <div id="message">🌿 You are fully relaxed! Great job! 😊</div>
+
+    <script>
+        let stressLevel = 100;
+        let num1, num2, correctAnswer;
+
+        function generateQuestion() {
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            correctAnswer = num1 + num2;
+            document.getElementById("question").innerText = `What is ${num1} + ${num2}?`;
+        }
+
+        function checkAnswer() {
+            let userAnswer = parseInt(document.getElementById("answer").value);
+            if (userAnswer === correctAnswer) {
+                stressLevel -= 20;
+                if (stressLevel < 0) stressLevel = 0;
+                document.getElementById("meter-bar").style.width = stressLevel + "%";
+                document.getElementById("answer").value = "";
+                if (stressLevel === 0) {
+                    document.getElementById("message").style.display = "block";
+                } else {
+                    generateQuestion();
+                }
+            } else {
+                alert("Oops! Try again, focus on the problem!");
+            }
+        }
+
+        generateQuestion();
+    </script>
+
+</body>
+</html>

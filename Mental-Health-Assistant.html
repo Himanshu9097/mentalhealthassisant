@@ -7,236 +7,378 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.2/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/responsivevoice/1.5.0/responsivevoice.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/recorderjs/0.1.0/recorder.min.js"></script>
+
     <style>
-        :root {
-            --primary-color: #4a90e2;
-            --background: #ffffff;
-            --text: #333333;
-            --card-bg: #f5f5f5;
-            --shadow: rgba(0, 0, 0, 0.1);
-        }
-
-        [data-theme="dark"] {
-            --primary-color: #64b5f6;
-            --background: #1a1a1a;
-            --text: #ffffff;
-            --card-bg: #2d2d2d;
-            --shadow: rgba(255, 255, 255, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            min-height: 100vh;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .theme-toggle {
-            background: var(--primary-color);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            color: white;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-
-        .chat-container {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 1rem;
-            height: 60vh;
-            overflow-y: auto;
-            box-shadow: 0 4px 6px var(--shadow);
-        }
-
-        .message {
-            margin: 1rem 0;
-            padding: 1rem;
-            border-radius: 8px;
-            max-width: 80%;
-            animation: fadeIn 0.3s ease-in;
-        }
-
-        .bot-message {
-            background: var(--primary-color);
-            color: white;
-            margin-right: auto;
-        }
-
-        .user-message {
-            background: var(--card-bg);
-            border: 1px solid var(--primary-color);
-            margin-left: auto;
-        }
-
-        .input-container {
-            margin-top: 1rem;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .user-input {
-            flex: 1;
-            padding: 1rem;
-            border: 2px solid var(--primary-color);
-            border-radius: 8px;
-            background: var(--card-bg);
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        .send-button {
-            padding: 0 2rem;
-            background: var(--primary-color);
-            border: none;
-            border-radius: 8px;
-            color: white;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .options-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .option-button {
-            background: var(--card-bg);
-            border: 1px solid var(--primary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            color: var(--text);
-        }
-
-        .disclaimer {
-            margin-top: 1rem;
-            font-size: 0.8rem;
-            color: var(--text);
-            opacity: 0.8;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 600px) {
-            .container { padding: 1rem; }
-            .message { max-width: 90%; }
-        }
-        .header-banner {
-    background: var(--primary-color);
-    color: white;
-    padding: 1.5rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px var(--shadow);
+       :root {
+    --primary-color: #10B981;
+    --secondary-color: #059669;
+    --glass-bg: rgba(0, 0, 0, 0.7);
+    --glass-light: rgba(0, 0, 0, 0.4);
+    --glass-border: rgba(16, 185, 129, 0.2);
+    --text: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.7);
+    --shadow: rgba(16, 185, 129, 0.3);
 }
 
-/* Feature Controls */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #000000, #10B981);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    color: var(--text);
+    line-height: 1.6;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.header {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.5s ease;
+}
+
+.header h1 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle {
+    background: var(--glass-light);
+    border: 1px solid var(--glass-border);
+    padding: 0.7rem 1.2rem;
+    border-radius: 15px;
+    color: var(--text);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: var(--primary-color);
+    transform: scale(1.05);
+}
+
+.chat-container {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    height: 60vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.5s ease;
+}
+
+.message {
+    margin: 1rem 0;
+    padding: 1.2rem;
+    border-radius: 15px;
+    max-width: 80%;
+    animation: messageSlide 0.3s ease;
+    border: 1px solid var(--glass-border);
+}
+
+.bot-message {
+    background: var(--glass-light);
+    margin-right: auto;
+    border-bottom-left-radius: 5px;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
+}
+
+.user-message {
+    background: rgba(16, 185, 129, 0.2);
+    margin-left: auto;
+    border-bottom-right-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.input-container {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    animation: slideUp 0.5s ease;
+}
+
+.user-input {
+    flex: 1;
+    padding: 1.2rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.user-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px var(--shadow);
+}
+
+.send-button {
+    padding: 0 2rem;
+    background: var(--primary-color);
+    border: none;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+}
+
+.send-button:hover {
+    transform: scale(1.05);
+    background: var(--secondary-color);
+}
+
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    animation: fadeIn 0.5s ease;
+}
+
+.option-button {
+    background: var(--glass-light);
+    border: 1px solid var(--glass-border);
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    color: var(--text);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.option-button:hover {
+    background: var(--primary-color);
+    transform: scale(1.05);
+}
+
 .feature-controls {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 1rem;
     display: flex;
     gap: 1rem;
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
     justify-content: center;
+    animation: slideDown 0.5s ease;
 }
 
 .control-button {
+    background: var(--glass-light);
+    border: 1px solid var(--glass-border);
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.control-button:hover {
     background: var(--primary-color);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    color: white;
+    transform: scale(1.05);
+}
+
+.language-selector {
+    background: var(--glass-light);
+    border: 1px solid var(--glass-border);
+    padding: 0.8rem;
+    border-radius: 12px;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.language-selector option {
+    background: #000000;
+    color: var(--text);
+}
+
+.record-button {
+    background: var(--glass-light);
+    border: 1px solid var(--glass-border);
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    color: var(--text);
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: transform 0.2s;
 }
 
-/* Message Enhancements */
+.record-button.recording {
+    background: var(--primary-color);
+    animation: pulse 1.5s infinite;
+}
+
+.disclaimer {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--glass-light);
+    border-radius: 12px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Animations */
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes messageSlide {
+    from { 
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to { 
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Custom Scrollbar */
+.chat-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-container::-webkit-scrollbar-track {
+    background: var(--glass-light);
+    border-radius: 10px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+/* Message Avatar and Controls */
 .message-header {
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
-    font-weight: bold;
 }
 
 .avatar {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    margin-right: 0.5rem;
+    margin-right: 0.8rem;
     border: 2px solid var(--primary-color);
 }
 
-/* Language Selector */
-.language-selector {
-    padding: 0.5rem;
+.message-controls {
+    margin-top: 0.8rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.read-button {
+    background: var(--glass-light);
+    border: none;
+    padding: 0.4rem 0.8rem;
     border-radius: 8px;
-    border: 2px solid var(--primary-color);
-    background: var(--card-bg);
     color: var(--text);
     cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
 }
 
-.file-upload {
-    display: none;
+.read-button:hover {
+    background: var(--primary-color);
 }
 
-.emotion-indicator {
-    font-size: 1.5rem;
-    margin-left: 0.5rem;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .header {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .message {
+        max-width: 90%;
+    }
+    
+    .feature-controls {
+        padding: 0.8rem;
+    }
+    
+    .control-button, .option-button {
+        padding: 0.6rem 1rem;
+    }
 }
 
-/* Typography Enhancements */
-.typography-enhanced {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.8;
-}
-
-/* Responsive Typography */
-@media (min-width: 320px) {
-    body { font-size: 14px; }
-    h1 { font-size: 1.5rem; }
-}
-
-@media (min-width: 768px) {
-    body { font-size: 16px; }
-    h1 { font-size: 2rem; }
-}
-
-@media (min-width: 1024px) {
-    body { font-size: 18px; }
-    h1 { font-size: 2.5rem; }
-}
     </style>
 </head>
 <body>
@@ -244,30 +386,11 @@
         <div class="header">
             <h1>Mental Health Assistant</h1>
             <button class="theme-toggle" onclick="toggleTheme()">🔆🌙</button>
+        
         </div>
         
-        <div class="chat-container" id="chatContainer"></div>
-        
-        <div class="input-container">
-            <input type="text" class="user-input" id="userInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
-            <button class="send-button" onclick="sendMessage()">Send</button>
-        </div>
-        
-        <p class="disclaimer">
-            Disclaimer: This chatbot is not a substitute for professional medical advice, diagnosis, or treatment. 
-            If you're experiencing a mental health emergency, please contact emergency services or call the National Crisis Hotline at 988.
-        </p>
-    </div>
-
-    <!-- Add feature controls below header -->
+<!-- Add feature controls below header -->
 <div class="feature-controls">
-    <button class="control-button" onclick="toggleSpeech()">
-        <i class="fas fa-volume-up"></i> Toggle Speech
-    </button>
-    <button class="control-button" onclick="document.getElementById('fileInput').click()">
-        <i class="fas fa-file-upload"></i> Upload File
-    </button>
-    <input type="file" id="fileInput" class="file-upload" onchange="handleFileUpload(event)">
     <select class="language-selector" onchange="changeLanguage(this.value)">
         <option value="en">English</option>
         <option value="hi">हिंदी (Hindi)</option>
@@ -281,6 +404,27 @@
         <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
     </select>
 </div>
+
+        <div class="chat-container" id="chatContainer"></div>
+        
+        <div class="input-container">
+            <input type="text" class="user-input" id="userInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+            <button class="send-button" onclick="sendMessage()">Send</button>
+        </div>
+        
+        <div class="container">
+            <div class="feature-controls">
+                <button class="record-button" id="recordButton" onclick="toggleRecording()">
+                    <i class="fas fa-microphone"></i> Record
+                </button>
+            </div>
+     <p class="disclaimer">
+            Disclaimer: This chatbot is not a substitute for professional medical advice, diagnosis, or treatment. 
+            If you're experiencing a mental health emergency, please contact emergency services or call the National Crisis Hotline at 988.
+        </p>
+    </div>
+
+  
 
     <script>
         const OPENROUTER_API_KEY = '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';
@@ -541,6 +685,246 @@ function addMessage(message, isUser = false) {
         speak(message);
     }
 }
+
+async function translateText(text, targetLang) {
+    try {
+        const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
+            model: "google/gemini-2.0-pro-exp-02-05:free",
+            messages: [
+                {
+                    role: "system",
+                    content: `You are a translator. Translate the following text to ${targetLang}. Maintain the tone and meaning of the original text.`
+                },
+                {
+                    role: "user",
+                    content: text
+                }
+            ]
+        }, {
+            headers: {
+                'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data.choices[0].message.content;
+    } catch (error) {
+        console.error('Translation error:', error);
+        return text; // Return original text if translation fails
+    }
+}
+
+// Modify the addMessage function to include the read button and translation
+async function addMessage(message, isUser = false) {
+    const chatContainer = document.getElementById('chatContainer');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${isUser ? 'user-message' : 'bot-message'} typography-enhanced`;
+
+    const headerDiv = document.createElement('div');
+    headerDiv.className = 'message-header';
+
+    const avatar = document.createElement('img');
+    avatar.className = 'avatar';
+    avatar.src = isUser ? 'https://cdn-icons-png.flaticon.com/512/6596/6596121.png' : 'https://thumbs.dreamstime.com/b/generative-ai-young-smiling-man-avatar-man-brown-beard-mustache-hair-wearing-yellow-sweater-sweatshirt-d-vector-people-279560903.jpg';
+    avatar.alt = isUser ? 'User Avatar' : 'AI Assistant';
+
+    const name = document.createElement('span');
+    name.textContent = isUser ? 'You' : 'AI Assistant';
+
+    headerDiv.appendChild(avatar);
+    headerDiv.appendChild(name);
+
+    const emotion = getEmotionEmoji(message);
+    if (emotion) {
+        const emotionSpan = document.createElement('span');
+        emotionSpan.className = 'emotion-indicator';
+        emotionSpan.textContent = emotion;
+        headerDiv.appendChild(emotionSpan);
+    }
+
+    messageDiv.appendChild(headerDiv);
+
+    // If not in English, translate the message
+    let displayMessage = message;
+    if (currentLanguage !== 'en' && !isUser) {
+        displayMessage = await translateText(message, currentLanguage);
+    }
+
+    const messageContent = document.createElement('div');
+    messageContent.textContent = displayMessage;
+    messageDiv.appendChild(messageContent);
+
+    // Add read button for AI responses
+    if (!isUser) {
+        const controlsDiv = document.createElement('div');
+        controlsDiv.className = 'message-controls';
+        
+        const readButton = document.createElement('button');
+        readButton.className = 'read-button';
+        readButton.innerHTML = '<i class="fas fa-volume-up"></i> Read';
+        readButton.onclick = () => responsiveVoice.speak(displayMessage, "UK English Female");
+        
+        controlsDiv.appendChild(readButton);
+        messageDiv.appendChild(controlsDiv);
+    }
+
+    chatContainer.appendChild(messageDiv);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+// Update the sendToAI function to handle translations in responses
+async function sendToAI(message) {
+    try {
+        // If not in English, first translate the user's message to English
+        let processedMessage = message;
+        if (currentLanguage !== 'en') {
+            processedMessage = await translateText(message, 'en');
+        }
+
+        const response = await axios.post('https://openrouter.ai/api/v1/chat/completions', {
+            model: "google/gemini-2.0-pro-exp-02-05:free",
+            messages: [
+                {
+                    role: "system",
+                    content: "You are a supportive mental health assistant. Provide encouraging, non-judgmental responses. Remember to always suggest professional help when appropriate."
+                },
+                {
+                    role: "user",
+                    content: processedMessage
+                }
+            ]
+        }, {
+            headers: {
+                'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        return response.data.choices[0].message.content;
+    } catch (error) {
+        console.error('Error:', error);
+        return "I apologize, but I'm having trouble processing your response. Please try again.";
+    }
+}
+
+// Update the changeLanguage function to handle translation of UI elements
+async function changeLanguage(lang) {
+    currentLanguage = lang;
+    const langName = document.querySelector(`option[value="${lang}"]`).text;
+    const message = await translateText(`Language changed to: ${langName}`, lang);
+    addMessage(message);
+    
+    // Optionally, translate the current question if in assessment
+    if (currentQuestionIndex < questions.length) {
+        const translatedQuestion = await translateText(questions[currentQuestionIndex].text, lang);
+        addMessage(translatedQuestion);
+        const translatedOptions = await Promise.all(
+            questions[currentQuestionIndex].options.map(opt => translateText(opt, lang))
+        );
+        addOptions(translatedOptions);
+    }
+}
+
+let recorder, audioChunks = [];
+        let isRecording = false;
+
+        function toggleRecording() {
+            const recordButton = document.getElementById('recordButton');
+            isRecording = !isRecording;
+
+            if (isRecording) {
+                recordButton.classList.add('recording'); // Add recording class
+                recordButton.innerHTML = '<i class="fas fa-stop"></i> Stop'; // Change icon and text
+                startRecording();
+            } else {
+                recordButton.classList.remove('recording'); // Remove recording class
+                recordButton.innerHTML = '<i class="fas fa-microphone"></i> Record'; // Change back icon and text
+                stopRecording();
+            }
+        }
+
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                recorder = new Recorder(stream);
+                recorder.start();
+                audioChunks = []; // Clear previous chunks
+                addMessage("Recording started...", true); // User message
+            } catch (err) {
+                console.error('Error accessing microphone:', err);
+                addMessage("Error accessing microphone. Please check permissions.", true);
+            }
+        }
+
+        function stopRecording() {
+            recorder.stop();
+            recorder.exportWAV(async blob => {
+                const formData = new FormData();
+                formData.append('audio', blob, 'recording.wav'); // Append audio blob
+
+                try {
+                    const response = await axios.post('/upload', formData, { // Replace '/upload' with your upload endpoint
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    });
+
+                    const transcription = response.data.transcription; // Assuming your server returns transcription
+                    addMessage("Transcription: " + transcription, true); // Add user message
+
+                    const aiResponse = await sendToAI(transcription);
+                    addMessage(aiResponse);
+
+                } catch (error) {
+                    console.error('Error uploading recording:', error);
+                    addMessage("Error processing recording. Please try again.", true);
+                }
+            });
+            recorder.clear();
+        }
+
+        let recognition;
+
+        function toggleRecording() {
+            isRecording = !isRecording;
+            const recordButton = document.getElementById('recordButton');
+
+            if (isRecording) {
+                recordButton.classList.add('recording');
+                recordButton.innerHTML = '<i class="fas fa-stop"></i> Stop';
+                startSpeechRecognition();
+            } else {
+                recordButton.classList.remove('recording');
+                recordButton.innerHTML = '<i class="fas fa-microphone"></i> Record';
+                stopSpeechRecognition();
+            }
+        }
+
+        function startSpeechRecognition() {
+            if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+                recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    addMessage("Transcription: " + transcript, true); // User message
+                    sendToAI(transcript); // Send to AI
+                };
+
+                recognition.onerror = (event) => {
+                    console.error("Speech recognition error:", event.error);
+                    addMessage("Speech recognition error. Please check permissions and try again.", true);
+                };
+
+                recognition.start();
+            } else {
+                addMessage("Speech recognition not supported in this browser.", true);
+            }
+        }
+
+        function stopSpeechRecognition() {
+            if (recognition) {
+                recognition.stop();
+            }
+        }
     </script>
 </body>
 </html>

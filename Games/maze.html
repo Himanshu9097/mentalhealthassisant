@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Maze - More Hurdles</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('https://source.unsplash.com/1600x900/?nature,sky') no-repeat center center/cover;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            background: rgba(255, 255, 255, 0.9);
+            border: 5px solid #ff6600;
+            border-radius: 10px;
+        }
+        #message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #ffcc00;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
+            font-size: 15px;
+            text-align: center;
+            color: #333;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+        }
+        #breathing {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(45deg, #ff6600, #ffcc00, #ff0066);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 20px;
+            animation: breathingAnimation 3s infinite alternate;
+        }
+        @keyframes breathingAnimation {
+            0% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="maze" width="500" height="500"></canvas>
+    <div id="message">🎉 You reached the center! Take a deep breath and smile! 😊</div>
+    <div id="breathing">🌬 Breathe in... 😌 Breathe out...</div>
+
+    <script>
+        const canvas = document.getElementById("maze");
+        const ctx = canvas.getContext("2d");
+        const cellSize = 50;
+        const rows = canvas.width / cellSize;
+        const cols = canvas.height / cellSize;
+
+        let player = { x: 0, y: 0 };
+        let goal = { x: Math.floor(rows / 2), y: Math.floor(cols / 2) };
+
+        let walls = [
+            { x: 1, y: 0 }, { x: 1, y: 1 }, { x: 1, y: 2 }, { x: 1, y: 3 }, { x: 1, y: 4 },
+            { x: 2, y: 4 }, { x: 3, y: 4 }, { x: 3, y: 3 }, { x: 3, y: 2 }, { x: 4, y: 2 },
+            { x: 4, y: 1 }, { x: 4, y: 0 }, { x: 2, y: 0 }, { x: 2, y: 1 }, { x: 2, y: 2 },
+            { x: 3, y: 6 }, { x: 4, y: 6 }, { x: 5, y: 6 }, { x: 5, y: 4 }, { x: 5, y: 2 }
+        ];
+
+        function drawMaze() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            walls.forEach((wall, index) => {
+                ctx.fillStyle = index % 2 === 0 ? "#ff0066" : "#6600ff";
+                ctx.fillRect(wall.x * cellSize, wall.y * cellSize, cellSize, cellSize);
+            });
+
+            ctx.fillStyle = "#ffff00"; // Yellow Player
+            ctx.fillRect(player.x * cellSize, player.y * cellSize, cellSize, cellSize);
+            ctx.fillStyle = "#ffcc00";
+            ctx.font = "30px Arial";
+            ctx.fillText("😊", player.x * cellSize + 10, player.y * cellSize + 35);
+
+            // Goal with rainbow gradient
+            let gradient = ctx.createRadialGradient(goal.x * cellSize + 25, goal.y * cellSize + 25, 5, goal.x * cellSize + 25, goal.y * cellSize + 25, 25);
+            gradient.addColorStop(0, "#ff0000");
+            gradient.addColorStop(0.2, "#ff9900");
+            gradient.addColorStop(0.4, "#ffff00");
+            gradient.addColorStop(0.6, "#33cc33");
+            gradient.addColorStop(0.8, "#0066ff");
+            gradient.addColorStop(1, "#9900cc");
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(goal.x * cellSize + 25, goal.y * cellSize + 25, 20, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function movePlayer(dx, dy) {
+            let newX = player.x + dx;
+            let newY = player.y + dy;
+
+            if (newX >= 0 && newX < rows && newY >= 0 && newY < cols &&
+                !walls.some(w => w.x === newX && w.y === newY)) {
+                player.x = newX;
+                player.y = newY;
+                drawMaze();
+                checkWin();
+            }
+        }
+
+        function checkWin() {
+            if (player.x === goal.x && player.y === goal.y) {
+                document.getElementById("message").style.display = "block";
+            }
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowUp") movePlayer(0, -1);
+            if (e.key === "ArrowDown") movePlayer(0, 1);
+            if (e.key === "ArrowLeft") movePlayer(-1, 0);
+            if (e.key === "ArrowRight") movePlayer(1, 0);
+        });
+
+        canvas.addEventListener("click", (e) => {
+            const rect = canvas.getBoundingClientRect();
+            let clickX = Math.floor((e.clientX - rect.left) / cellSize);
+            let clickY = Math.floor((e.clientY - rect.top) / cellSize);
+
+            if (!walls.some(w => w.x === clickX && w.y === clickY)) {
+                player.x = clickX;
+                player.y = clickY;
+                drawMaze();
+                checkWin();
+            }
+        });
+
+        function updateBreathingMessage() {
+            const messages = [
+                "🌬 Breathe in... 💨",
+                "Hold for a moment... 😌",
+                "Breathe out... 🎈",
+                "You're doing great! 🏆"
+            ];
+            let index = 0;
+            setInterval(() => {
+                document.getElementById("breathing").innerText = messages[index];
+                index = (index + 1) % messages.length;
+            }, 3000);
+        }
+
+        drawMaze();
+        updateBreathingMessage();
+    </script>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stress-Busting Match Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .stress-meter {
+            margin-bottom: 20px;
+        }
+
+        #stress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #stress-level {
+            width: 100%;
+            height: 100%;
+            background-color: #ff3b30;
+            transition: width 0.3s;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            grid-gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            width: 80px;
+            height: 80px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .card.flipped {
+            background-color: #d0f0d0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Stress-Busting Match Game</h1>
+        <p>Match the cards to reduce your stress level!</p>
+        <div class="stress-meter">
+            <h2>Stress Meter</h2>
+            <div id="stress-bar">
+                <div id="stress-level"></div>
+            </div>
+            <p id="stress-text">Stress: 100%</p>
+        </div>
+        <div class="game-board">
+            <!-- Cards will be placed here by JavaScript -->
+        </div>
+        <button id="reset-btn">Restart Game</button>
+    </div>
+
+    <script>
+        const activities = [
+            "Take a deep breath",
+            "Go for a walk",
+            "Do a quick workout",
+            "Practice mindfulness",
+            "Listen to calming music",
+            "Stretch your body",
+            "Drink water",
+            "Take a power nap",
+            "Meditate for 5 minutes",
+            "Talk to a friend",
+            "Read a book",
+            "Write in a journal"
+        ];
+
+        let cards = [];
+        let flippedCards = [];
+        let matchedCards = 0;
+        let stressLevel = 100;
+
+        const gameBoard = document.querySelector('.game-board');
+        const stressLevelBar = document.querySelector('#stress-level');
+        const stressText = document.querySelector('#stress-text');
+        const resetButton = document.querySelector('#reset-btn');
+
+        // Duplicate the activities to create pairs of cards
+        const shuffledActivities = [...activities, ...activities].sort(() => Math.random() - 0.5);
+
+        // Create cards based on the shuffled activities
+        shuffledActivities.forEach((activity, index) => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+            card.dataset.activity = activity;
+            card.dataset.index = index;
+
+            card.addEventListener('click', flipCard);
+            gameBoard.appendChild(card);
+        });
+
+        // Flip the card
+        function flipCard(event) {
+            const clickedCard = event.target;
+
+            if (flippedCards.length < 2 && !clickedCard.classList.contains('flipped') && !flippedCards.includes(clickedCard)) {
+                clickedCard.classList.add('flipped');
+                clickedCard.innerText = clickedCard.dataset.activity;
+                flippedCards.push(clickedCard);
+
+                if (flippedCards.length === 2) {
+                    checkMatch();
+                }
+            }
+        }
+
+        // Check if the flipped cards match
+        function checkMatch() {
+            if (flippedCards[0].dataset.activity === flippedCards[1].dataset.activity) {
+                matchedCards++;
+                reduceStress();
+
+                if (matchedCards === activities.length) {
+                    setTimeout(() => alert("Congratulations! You've reduced all your stress!"), 500);
+                }
+
+                flippedCards = [];
+            } else {
+                setTimeout(() => {
+                    flippedCards.forEach(card => {
+                        card.classList.remove('flipped');
+                        card.innerText = '';
+                    });
+                    flippedCards = [];
+                }, 1000);
+            }
+        }
+
+        // Reduce the stress level based on the number of matches
+        function reduceStress() {
+            stressLevel -= 5;
+            if (stressLevel < 0) stressLevel = 0;
+            updateStressMeter();
+        }
+
+        // Update the stress bar and text
+        function updateStressMeter() {
+            stressLevelBar.style.width = `${stressLevel}%`;
+            stressText.innerText = `Stress: ${stressLevel}%`;
+        }
+
+        // Reset the game
+        resetButton.addEventListener('click', () => {
+            cards.forEach(card => {
+                card.classList.remove('flipped');
+                card.innerText = '';
+            });
+            flippedCards = [];
+            matchedCards = 0;
+            stressLevel = 100;
+            updateStressMeter();
+            shuffledActivities.sort(() => Math.random() - 0.5);
+            gameBoard.innerHTML = '';
+            shuffledActivities.forEach((activity, index) => {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.dataset.activity = activity;
+                card.dataset.index = index;
+                card.addEventListener('click', flipCard);
+                gameBoard.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>
