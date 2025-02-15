@@ -17,10 +17,10 @@ document.querySelector(".login-btn").addEventListener("click", function () {
     window.location.href = 'Login-Signup.html'; // You can change this to any other page
   });
 
-  document.querySelector(".login-btn").addEventListener("click", function () {
-    console.log("Login clicked");
-    window.open('login.html', '_blank');
-  });
+  // document.querySelector(".login-btn").addEventListener("click", function () {
+  //   console.log("Login clicked");
+  //   window.open('login.html', '_blank');
+  // });
 
 
   document.querySelector(".hero-btn-primary").addEventListener("click", function () {
