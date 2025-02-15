@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Assistant - Testimonials</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000000, #059669);
+            color: #ffffff;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #059669;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #059669;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stars {
+            color: #ffd700;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .testimonial-role {
+            color: #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-duration {
+            color: #e0e0e0;
+            font-size: 0.85rem;
+            margin-top: 5px;
+        }
+
+        .filter-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .filter-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #059669;
+            color: #ffffff;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button.active {
+            background: #059669;
+            color: white;
+        }
+
+        .filter-button:hover {
+            background: #059669;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .cta-button {
+            background-color: #059669;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #047857;
+            transform: scale(1.05);
+        }
+
+        .trust-indicators {
+            text-align: center;
+            margin-top: 40px;
+            color: #e0e0e0;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section {
+            color: #ffffff;
+        }
+
+        .footer-section h3 {
+            color: #059669;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #059669;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">Mind Master</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <!-- <a href="#">Services</a> -->
+                <a href="#">Testimonials</a>
+                <!-- <a href="#">Resources</a> -->
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <h1>Real Stories of Growth and Healing</h1>
+            <p>Discover how our mental health platform has helped people from all walks of life find their path to better mental wellbeing.</p>
+        </div>
+
+        <div class="filter-section">
+            <button class="filter-button active" data-category="all">All Stories</button>
+            <button class="filter-button" data-category="anxiety">Anxiety</button>
+            <button class="filter-button" data-category="depression">Depression</button>
+            <button class="filter-button" data-category="stress">Stress</button>
+        </div>
+
+        <div class="testimonials-grid" id="testimonials-container">
+            <!-- Testimonials will be inserted here by JavaScript -->
+        </div>
+
+        <div class="cta-section">
+            <p style="margin-bottom: 20px; font-size: 1.2rem; color: #e0e0e0;">Ready to start your journey to better mental health?</p>
+            <button class="cta-button">Begin Your Journey Today</button>
+        </div>
+
+        <div class="trust-indicators">
+            <p style="margin-bottom: 15px;">🔒 Your privacy and security are our top priority</p>
+            <p>Available 24/7 • Professional Support • Confidential Care</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Anxiety Support</a></li>
+                    <li><a href="#">Depression Help</a></li>
+                    <li><a href="#">Stress Management</a></li>
+                    <li><a href="#">Crisis Support</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Emergency Line</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Community</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 MentalHealth.AI. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const testimonials = [
+            {
+                name: "Sarah M.",
+                role: "Anxiety Management Client",
+                content: "This platform has been transformative in my journey with anxiety. The 24/7 support and personalized guidance helped me develop coping strategies I use every day. It's like having a compassionate supporter in your pocket.",
+                rating: 5,
+                duration: "Client for 8 months",
+                category: "anxiety"
+            },
+            {
+                name: "James D.",
+                role: "Depression Support Client",
+                content: "I was hesitant about digital mental health support, but this service proved me wrong. The combination of AI assistance and professional oversight creates a safe space for healing. I've made more progress in 6 months than I did in years of trying to manage alone.",
+                rating: 5,
+                duration: "Client for 6 months",
+                category: "depression"
+            },
+            {
+                name: "Maria L.",
+                role: "Stress Management Client",
+                content: "As a busy professional, I needed flexible mental health support that worked around my schedule. This platform provides exactly that - professional guidance whenever I need it. The daily check-ins and progress tracking have been invaluable.",
+                rating: 4,
+                duration: "Client for 3 months",
+                category: "stress"
+            }
+        ];
+
+        function createStarRating(rating) {
+            return "★".repeat(rating) + "☆".repeat(5 - rating);
+        }
+
+        function renderTestimonials(category = 'all') {
+            const container = document.getElementById('testimonials-container');
+            container.innerHTML = '';
+
+            const filteredTestimonials = category === 'all' 
+                ? testimonials 
+                : testimonials.filter(t => t.category === category);
+
+            filteredTestimonials.forEach(testimonial => {
+                const card = document.createElement('div');
+                card.className = 'testimonial-card';
+                card.innerHTML = `
+                    <div class="stars">${createStarRating(testimonial.rating)}</div>
+                    <div class="testimonial-content">"${testimonial.content}"</div>
+                    <div class="testimonial-author">${testimonial.name}</div>
+                    <div class="testimonial-role">${testimonial.role}</div>
+                    <div class="testimonial-duration">${testimonial.duration}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Initial render
+        renderTestimonials();
+
+        // Filter functionality
+        document.querySelectorAll('.filter-button').forEach(button => {
+            button.addEventListener('click', () => {
+                document.querySelectorAll('.filter-button').forEach(btn => 
+                    btn.classList.remove('active'));
+                button.classList.add('active');
+                renderTestimonials(button.dataset.category);
+            });
+        });
+    </script>
+</body>
+</html>

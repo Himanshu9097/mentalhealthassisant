@@ -178,9 +178,11 @@
                         <h3>${consultant.name}</h3>
                         <p>Expertise: ${consultant.expertise}</p>
                         <p>Location: ${consultant.location}</p>
-                        <button class="video-call-btn" onclick="createMeetLink(${JSON.stringify(consultant)})">
+                        <a href="WEB_UIKITS.html">
+                          <button class="video-call-btn" onclick="createMeetLink(${JSON.stringify(consultant)})">
                             Start Video Call
                         </button>
+                        </a>
                     `;
                     grid.appendChild(card);
                 });
@@ -197,7 +199,7 @@
 
             const searchQuery = `consultant in ${location}`;
             const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
-            window.open(googleSearchUrl, '_blank');
+            window.open("WEB_UIKITS.html", '_blank');
         }
     </script>
 </body>
