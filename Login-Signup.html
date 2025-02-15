@@ -1,466 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login & Signup Form with Email Verification</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up Page</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+    
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          Oxygen, Ubuntu, Cantarell, sans-serif;
-      }
-
-      body {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(120deg, #000000 70%, #10b981 100%);
-        background-size: 200% 200%;
-        animation: gradientAnimation 6s infinite alternate;
-      }
-
-      @keyframes gradientAnimation {
-        0% {
-          background-position: 0% 50%;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        100% {
-          background-position: 100% 50%;
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f9;
         }
-      }
 
-      .wrapper {
-        position: relative;
-        max-width: 600px; /* Increased width */
-        width: 100%;
-        border-radius: 12px;
-        padding: 20px 30px 80px; /* Reduced padding to decrease height */
-        background: #10b981;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-      }
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-      .form.login {
-        position: absolute;
-        left: 50%;
-        bottom: -86%;
-        transform: translateX(-50%);
-        width: calc(100% + 220px);
-        padding: 20px 140px;
-        border-radius: 50%;
-        height: 100%;
-        background: #fff;
-        transition: all 0.6s ease;
-      }
+        .login-box {
+            width: 90%;
+            max-width: 1200px;
+            height: 80vh;
+            display: flex;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
 
-      .wrapper.active .form.login {
-        bottom: -15%;
-        border-radius: 35%;
-        box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.1);
-      }
+        .left-box, .right-box {
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
 
-      .form header {
-        font-size: 30px;
-        text-align: center;
-        color: #fff;
-        font-weight: 600;
-        cursor: pointer;
-      }
+        .left-box {
+            background-color: #ffffff;
+        }
 
-      .form.login header {
-        color: #333;
-        opacity: 0.6;
-      }
+        .left-box img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
 
-      .wrapper.active .form.login header {
-        opacity: 1;
-      }
+        .left-box h1 {
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: #333;
+        }
 
-      .wrapper.active .signup header {
-        opacity: 0.6;
-      }
+        .left-box p {
+            color: #666;
+            font-size: 16px;
+        }
 
-      .wrapper form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        margin-top: 40px;
-      }
+        .social-icons {
+            margin: 20px 0;
+        }
 
-      form input {
-        height: 60px;
-        outline: none;
-        border: none;
-        padding: 0 15px;
-        font-size: 16px;
-        font-weight: 400;
-        color: #333;
-        border-radius: 8px;
-        background: #fff;
-      }
+        .social-btn {
+            border: none;
+            padding: 12px;
+            margin: 10px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
 
-      .form.login input {
-        border: 1px solid #aaa;
-      }
+        .facebook { background-color: #3b5998; color: white; }
+        .google { background-color: #dd4b39; color: white; }
+        .linkedin { background-color: #0077b5; color: white; }
 
-      .form.login input:focus {
-        box-shadow: 0 1px 0 #ddd;
-      }
+        .or-text {
+            margin: 20px 0;
+            font-size: 16px;
+            color: #999;
+        }
 
-      form .checkbox {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
+        form input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
 
-      .checkbox input[type="checkbox"] {
-        height: 16px;
-        width: 16px;
-        accent-color: #fff;
-        cursor: pointer;
-      }
+        .sign-in {
+            width: 100%;
+            padding: 14px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
 
-      form .checkbox label {
-        cursor: pointer;
-        color: #fff;
-      }
+        .right-box {
+            background: #e0f7fa;
+            color: #333;
+        }
 
-      form a {
-        color: #333;
-        text-decoration: none;
-      }
+        .right-box h2 {
+            font-size: 32px;
+            color: #00796b;
+        }
 
-      form a:hover {
-        text-decoration: underline;
-      }
+        .right-box p {
+            font-size: 18px;
+            margin: 15px 0;
+            color: #555;
+        }
 
-      form input[type="submit"],
-      .google-btn {
-        margin-top: 15px;
-        padding: none;
-        font-size: 18px;
-        font-weight: 500;
-        cursor: pointer;
-        height: 60px;
-        border-radius: 8px;
-        border: none;
-      }
+        .sign-up {
+            background: #0288d1;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
 
-      .form.login input[type="submit"] {
-        background: #10b981;
-        color: #fff;
-      }
+        .sign-up-form input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
 
-      .google-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        background: #fff;
-        color: #333;
-        transition: background-color 0.3s;
-      }
+        .sign-up-form button {
+            padding: 14px;
+            background-color: #0288d1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+        }
 
-      .google-btn:hover {
-        background: #f1f1f1;
-      }
+        /* Initially hidden Sign Up form */
+        .sign-up-form-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4); 
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
 
-      .google-btn i {
-        font-size: 24px;
-        color: #10b981;
-      }
+        .sign-up-form-box {
+            width: 400px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
 
-      .or-divider {
-        text-align: center;
-        color: #fff;
-        margin: 10px 0;
-      }
+        .form-box.hidden {
+            display: none;
+        }
 
-      .form.login .or-divider {
-        color: #333;
-      }
+        .sign-up-form-container button {
+            margin-top: 20px;
+        }
 
-      .password-field {
-        position: relative;
-        width: 100%;
-      }
+        /* Add spacing between the sign-up and back-to-login buttons */
+        .sign-up-form-container .sign-up,
+        .sign-up-form-container button {
+            margin-bottom: 20px;
+        }
 
-      .password-field input {
-        width: 100%;
-      }
+        @media (max-width: 768px) {
+            .login-box {
+                flex-direction: column;
+                height: auto;
+            }
 
-      .password-toggle {
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        color: #666;
-      }
+            .left-box, .right-box {
+                width: 100%;
+                padding: 30px;
+            }
+        }
 
-      .verification-message {
-        color: #fff;
-        text-align: center;
-        margin-top: 10px;
-        font-size: 14px;
-      }
-
-      .form.login .verification-message {
-        color: #333;
-      }
-      /* Rest of the previous CSS remains the same */
     </style>
-  </head>
-  <body>
-    <section class="wrapper">
-      <div class="form signup">
-        <header>Signup</header>
-        <form id="signupForm">
-          <input type="text" placeholder="Full name" id="signupName" required />
-          <input
-            type="email"
-            placeholder="Email address"
-            id="signupEmail"
-            required
-          />
-          <div class="password-field">
-            <input
-              type="password"
-              placeholder="Password"
-              id="signupPassword"
-              required
-            />
-            <i
-              class="password-toggle fas fa-eye"
-              onclick="togglePassword('signupPassword', this)"
-            ></i>
-          </div>
-          <div class="checkbox">
-            <input type="checkbox" id="signupCheck" required />
-            <label for="signupCheck">I accept all terms & conditions</label>
-          </div>
-          <input type="submit" value="Signup" />
-          <div class="verification-message" id="signupMessage"></div>
-          <div class="or-divider">- OR -</div>
-          <button type="button" class="google-btn" onclick="signInWithGoogle()">
-            <i class="fab fa-google"></i>
-            Sign up with Google
-          </button>
-        </form>
-      </div>
+</head>
 
-      <div class="form login">
-        <header>Login</header>
-        <form id="loginForm">
-          <input
-            type="email"
-            placeholder="Email address"
-            id="loginEmail"
-            required
-          />
-          <div class="password-field">
-            <input
-              type="password"
-              placeholder="Password"
-              id="loginPassword"
-              required
-            />
-            <i
-              class="password-toggle fas fa-eye"
-              onclick="togglePassword('loginPassword', this)"
-            ></i>
-          </div>
-          <a href="#" onclick="forgotPassword(event)">Forgot password?</a>
-          <input type="submit" value="Login" />
-          <div class="verification-message" id="loginMessage"></div>
-          <div class="or-divider">- OR -</div>
-          <button type="button" class="google-btn" onclick="signInWithGoogle()">
-            <i class="fab fa-google"></i>
-            Login with Google
-          </button>
-        </form>
-      </div>
-    </section>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <!-- Sign In Form -->
+            <div class="left-box" id="loginForm">
+                <img src="\Screenshot 2025-01-30 200759.png" alt="Anonymous Avatar">
+                <h1>Login to Your Account</h1>
+                <p>Login using social networks</p>
+                <div class="social-icons">
+                    <i class="fa-brands fa-facebook fa-xl"></i>&nbsp;&nbsp;&nbsp;
+                    <i class="fa-brands fa-google fa-xl"></i>&nbsp;&nbsp;&nbsp;
+                    <i class="fa-brands fa-linkedin fa-xl"></i>
+                </div>
+                <p class="or-text">OR</p>
+                <form>
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit" class="sign-in">Sign In</button>
+                </form>
+            </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-auth-compat.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-database-compat.min.js"></script>
+            <!-- Right Box -->
+            <div class="right-box">
+                <button class="sign-up" id="showSignUpBtn">Sign Up</button>
+                <h2>New Here?</h2>
+                <p>Sign up and discover a great amount of new opportunities!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Form Popup -->
+    <div class="sign-up-form-container" id="signUpFormContainer">
+        <div class="sign-up-form-box">
+            <h1>Create Your Account</h1>
+            <form class="sign-up-form">
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <input type="password" placeholder="Confirm Password" required>
+                <button type="submit">Sign Up</button>
+            </form>
+            <button class="sign-up" id="backToLoginBtn">Back to Login</button>
+        </div>
+    </div>
 
     <script>
-      // Firebase configuration
-      const firebaseConfig = {
-        apiKey: "AIzaSyDU9W-SizWu6OMx-Yon8r-jX9MpqAwYeHQ",
-        authDomain: "food-5c272.firebaseapp.com",
-        databaseURL:
-          "https://food-5c272-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "food-5c272",
-        storageBucket: "food-5c272.firebasestorage.app",
-        messagingSenderId: "188197961390",
-        appId: "1:188197961390:web:967076142ccc8bee11b73f",
-        measurementId: "G-JXRRV76WQ8",
-      };
-
-      firebase.initializeApp(firebaseConfig);
-
-      // Check if user is already logged in and email is verified
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          if (user.emailVerified) {
-            window.location.href = "dashboard.html";
-          }
-        }
-      });
-
-      // Toggle password visibility
-      function togglePassword(inputId, icon) {
-        const input = document.getElementById(inputId);
-        if (input.type === "password") {
-          input.type = "text";
-          icon.classList.remove("fa-eye");
-          icon.classList.add("fa-eye-slash");
-        } else {
-          input.type = "password";
-          icon.classList.remove("fa-eye-slash");
-          icon.classList.add("fa-eye");
-        }
-      }
-
-      // Forgot password functionality
-      function forgotPassword(e) {
-        e.preventDefault();
-        const email = document.getElementById("loginEmail").value;
-        if (!email) {
-          alert("Please enter your email address first");
-          return;
-        }
-
-        firebase
-          .auth()
-          .sendPasswordResetEmail(email)
-          .then(() => {
-            alert("Password reset email sent. Please check your inbox.");
-          })
-          .catch((error) => {
-            alert("Error: " + error.message);
-          });
-      }
-
-      // Toggle between login and signup forms
-      const wrapper = document.querySelector(".wrapper");
-      const signupHeader = document.querySelector(".signup header");
-      const loginHeader = document.querySelector(".login header");
-
-      loginHeader.addEventListener("click", () => {
-        wrapper.classList.add("active");
-      });
-      signupHeader.addEventListener("click", () => {
-        wrapper.classList.remove("active");
-      });
-
-      // Google Sign In with redirect
-      function signInWithGoogle() {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        firebase
-          .auth()
-          .signInWithPopup(provider)
-          .then((result) => {
-            const user = result.user;
-            return firebase
-              .database()
-              .ref("users/" + user.uid)
-              .set({
-                name: user.displayName,
-                email: user.email,
-                profile_picture: user.photoURL,
-                emailVerified: true,
-              });
-          })
-          .then(() => {
-            window.location.href = "dashboard.html";
-          })
-          .catch((error) => {
-            console.error(error);
-            alert("Error signing in with Google: " + error.message);
-          });
-      }
-
-      // Email/Password Signup with verification
-      document.getElementById("signupForm").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const email = document.getElementById("signupEmail").value;
-        const password = document.getElementById("signupPassword").value;
-        const name = document.getElementById("signupName").value;
-
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            // Send verification email
-            return user.sendEmailVerification().then(() => {
-              return firebase
-                .database()
-                .ref("users/" + user.uid)
-                .set({
-                  name: name,
-                  email: email,
-                  emailVerified: false,
-                });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Show sign-up form overlay and hide login form
+            document.getElementById("showSignUpBtn").addEventListener("click", function () {
+                document.getElementById("signUpFormContainer").style.display = 'flex';
+                document.getElementById("loginForm").classList.add("hidden");
             });
-          })
-          .then(() => {
-            document.getElementById("signupMessage").textContent =
-              "Registration successful! Please check your email to verify your account.";
-            document.getElementById("signupForm").reset();
-          })
-          .catch((error) => {
-            document.getElementById("signupMessage").textContent =
-              "Error: " + error.message;
-          });
-      });
 
-      // Email/Password Login with verification check
-      document.getElementById("loginForm").addEventListener("submit", (e) => {
-        e.preventDefault();
-        const email = document.getElementById("loginEmail").value;
-        const password = document.getElementById("loginPassword").value;
+            // Hide sign-up form and show login form
+            document.getElementById("backToLoginBtn").addEventListener("click", function () {
+                document.getElementById("signUpFormContainer").style.display = 'none';
+                document.getElementById("loginForm").classList.remove("hidden");
+            });
 
-        firebase
-          .auth()
-          .signInWithEmailAndPassword(email, password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            if (!user.emailVerified) {
-              document.getElementById("loginMessage").textContent =
-                "Please verify your email address first. Check your inbox.";
-              firebase.auth().signOut();
-              throw new Error("Email not verified");
-            }
-            return firebase
-              .database()
-              .ref("users/" + user.uid)
-              .update({
-                lastLogin: new Date().toISOString(),
-              });
-          })
-          .then(() => {
-            window.location.href = "dashboard.html";
-          })
-          .catch((error) => {
-            if (error.message !== "Email not verified") {
-              document.getElementById("loginMessage").textContent =
-                "Error: " + error.message;
-            }
-          });
-      });
+            document.querySelector("form").addEventListener("submit", function (event) {
+                event.preventDefault();
+                alert("Login successful!");
+            });
+        });
     </script>
-  </body>
+</body>
+
 </html>
