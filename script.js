@@ -32,3 +32,8 @@ document.querySelector(".login-btn").addEventListener("click", function () {
     console.log("Sign Up clicked");
     window.location.href = 'https://drive.google.com/file/d/1ptE8VIxFcgKfNkxpefJ1LztHmyQ9ETKJ/view?usp=sharing'; // You can change this to any other page
   });
+
+  document.querySelector(".btn-secondary").addEventListener("click", function () {
+    console.log("Sign Up clicked");
+    window.location.href = 'zenzone.html'; // You can change this to any other page
+  });
