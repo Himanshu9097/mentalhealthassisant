@@ -37,3 +37,7 @@ document.querySelector(".login-btn").addEventListener("click", function () {
     console.log("Sign Up clicked");
     window.location.href = 'zenzone.html'; // You can change this to any other page
   });
+  document.querySelector(".btn-tertiary").addEventListener("click", function () {
+    console.log("Sign Up clicked");
+    window.location.href = 'call.html'; // You can change this to any other page
+  });
